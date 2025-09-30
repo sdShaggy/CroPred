@@ -52,7 +52,7 @@
 
 Make sure you have the following installed:
 
-- Python 3.x
+- Python 3.9
 - Flask
 - Pandas
 - Numpy
