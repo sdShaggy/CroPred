@@ -36,10 +36,10 @@
    ```bash
    cd CroPred
    ```
-3. Clone the repository:
+3. Install Requirements:
    ```bash
    pip install -r requirements.txt
-  ```
+   ```
 4. Run the application:
    ```bash
    python app.py
