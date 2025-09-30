@@ -35,7 +35,7 @@
 2. Navigate to the project directory:
    ```bash
    cd CroPred
-  ```
+   ```
 3. Clone the repository:
    ```bash
    pip install -r requirements.txt
