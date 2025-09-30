@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Register</title>
+  <style>
+    body {
+      background: url("/static/paddyf.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 1.4rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1,
+    header h3,
+    header p {
+      margin-bottom: 0.5rem;
+    }
+
+
+    .form-box {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-box h1 {
+      color: #4CAF50;
+    }
+
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .flash {
+      color: red;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .captcha-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .captcha-box {
+      padding: 0.5rem 1rem;
+      background-color: #e0f7e0;
+      border-radius: 0.3rem;
+      font-weight: bold;
+      font-size: 1.2rem;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>CroPred</h1>
+    <h3>Specialized Crop Yield Prediction</h3>
+    <h3>Govt. of Orissa - Dept. of Agriculture</h3>
+    <p>Empowering farmers with AI-powered yield reports</p>
+  </header>
+  <main>
+    <div class="form-box">
+      <h1>Register User</h1>
+      <form method="POST">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="aadhar">AADHAAR No.:</label>
+          <input type="text" name="aadhar" id="aadhar" required>
+        </div>
+
+        <div class="form-group">
+          <label for="mobile">Mobile No.:</label>
+          <input type="text" name="mobile" id="mobile" required>
+        </div>
+
+        <div class="form-group">
+          <label for="pred_id">Pred_ID:</label>
+          <input type="text" name="pred_id" id="pred_id" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+
+        <div class="form-group captcha-container">
+          <div class="captcha-box">{{ captcha_text }}</div>
+          <input type="text" id="captcha_input" name="captcha_input" placeholder="Enter Captcha" required>
+        </div>
+
+        <button type="submit">Register</button>
+      </form>
+
+
+      <div class="login-link">
+        Already have an account? <a href="{{ url_for('login') }}">Login</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+
+</html>

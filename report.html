@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Crop Report</title>
+  <style>
+    body {
+      background: url("/static/paddyf.jpg") no-repeat center center fixed;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+      background-color: #f4fdf4;
+    }
+
+    h1 {
+      color: #4CAF50;
+    }
+
+    .report-box {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .info {
+      margin-bottom: 1rem;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .yield-result {
+      font-size: 1.4rem;
+      color: #388E3C;
+      margin-top: 1rem;
+    }
+
+    .report-box {
+  position: relative; /* needed for absolute positioning of logout */
+}
+
+.logout-link {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #388E3C;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="report-box">
+    <h1>Crop Report</h1>
+    <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+
+    <div class="info"><span class="label">District:</span> {{ district }}</div>
+    <div class="info"><span class="label">Season:</span> {{ season }}</div>
+    <div class="info"><span class="label">Crop:</span> {{ crop }}</div>
+    <div class="info"><span class="label">Soil Type:</span> {{ soil_type }}</div>
+    <div class="info"><span class="label">Average Rainfall:</span> {{ rainfall }} mm</div>
+    <div class="info"><span class="label">NDVI Avg:</span> {{ ndvi_avg }}</div>
+
+    <div class="yield-result">✅ Predicted Yield: <strong>{{ predicted_yield }} kg/ha</strong></div>
+
+    <div style="margin-top: 2rem;">
+      <h3>Calculate Your Total Yield</h3>
+
+      <div class="form-group">
+        <p>(1 hectare= 100,000 m<sup>2</sup>)</p>
+        <label for="land_size">Enter Your Land Size (in hectares):</label>
+        <input type="number" id="land_size" step="0.01" min="0" placeholder="e.g. 2.5"
+          style="padding: 0.5rem; width: 100%; max-width: 300px; border: 1px solid #ccc; border-radius: 0.5rem;">
+      </div>
+
+      <button onclick="calculateTotalYield()"
+        style="margin-top: 1rem; padding: 0.5rem 1rem; background-color: #4CAF50; color: white; border: none; border-radius: 0.5rem; cursor: pointer;">
+        Calculate Total Yield
+      </button>
+
+      <div id="total-yield-result" style="margin-top: 1rem; font-weight: bold;"></div>
+    </div>
+
+    <hr style="margin: 2rem 0;">
+
+    <div>
+      <h3>Recommendations</h3>
+      <ul>
+        <li>Ensure soil pH is within optimal range for {{ crop }}.</li>
+        <li>Consider rotating crops to preserve soil nutrients.</li>
+        <li>Use proper fertilizers judiciously to avoid soil degradation.</li>
+        <li>Maintain irrigation timing for best growth.</li>
+      </ul>
+    </div>
+  </div>
+
+</body>
+
+<script>
+  function calculateTotalYield() {
+    const landSize = parseFloat(document.getElementById('land_size').value);
+    const yieldPerHa = parseFloat("{{ predicted_yield }}"); // Predicted yield (kg/ha) from backend
+
+    const resultDiv = document.getElementById('total-yield-result');
+
+    // Validate input
+    if (isNaN(landSize) || landSize <= 0) {
+      resultDiv.innerHTML = "⚠️ Please enter a valid land size.";
+      resultDiv.style.color = "#d32f2f";
+      return;
+    }
+
+    // Calculate total yield (kg/ha × hectares = kg)
+    const totalYieldKg = yieldPerHa * landSize;
+
+    // Show result
+    resultDiv.innerHTML = `🌾 Total Predicted Yield: <strong>${totalYieldKg.toFixed(2)} kg</strong>`;
+    resultDiv.style.color = "#388E3C";
+  }
+</script>
+
+
+</html>

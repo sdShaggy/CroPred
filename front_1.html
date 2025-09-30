@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CroPred</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: url("/static/paddyf.jpg") no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: #fff;
+      padding: 1.4rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1,
+    header h2,
+    header p {
+      margin-bottom: 0.5rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.95);
+      /* White with slight transparency */
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card h2 {
+      color: #4CAF50;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #388E3C;
+    }
+
+    footer {
+      background-color: #4CAF50;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+    #prediction-result {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 1.5rem;
+      }
+    }
+
+    .welcome {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4CAF50;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <header>
+    <h1>CroPred</h1>
+    <h3>Specialized Crop Yield Prediction</h3>
+    <h3>Govt. of Orissa - Dept. of Agriculture</h3>
+    <p>Empowering farmers with AI-powered yield reports</p>
+
+    <div style="position: absolute; top: 1rem; right: 1rem;">
+      <a href="{{ url_for('logout') }}" style="color: white; padding: 0.5rem 1rem; 
+              border-radius: 0.3rem; text-decoration: none; font-weight: bold;">
+        Logout
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="welcome">
+        Welcome, {{ user_name }}!
+      </div>
+      <h2>Enter Farm Details</h2>
+      <form id="prediction-form" method="POST" action="/predict">
+        <div class="form-group">
+          <label for="district">District</label>
+          <select id="district" name="district" required>
+            <option value="">Select District</option>
+            <option value="Angul">Angul</option>
+            <option value="Balangir">Balangir</option>
+            <option value="Balasore">Balasore</option>
+            <option value="Bargarh">Bargarh</option>
+            <option value="Bhadrak">Bhadrak</option>
+            <option value="Boudh">Boudh</option>
+            <option value="Cuttack">Cuttack</option>
+            <option value="Deogarh">Deogarh</option>
+            <option value="Dhenkanal">Dhenkanal</option>
+            <option value="Gajapati">Gajapati</option>
+            <option value="Ganjam">Ganjam</option>
+            <option value="Jagatsinghpur">Jagatsinghpur</option>
+            <option value="Jajpur">Jajpur</option>
+            <option value="Jharsuguda">Jharsuguda</option>
+            <option value="Kalahandi">Kalahandi</option>
+            <option value="Kandhamal">Kandhamal</option>
+            <option value="Kendrapara">Kendrapara</option>
+            <option value="Kendujhar (Keonjhar)">Kendujhar (Keonjhar)</option>
+            <option value="Khordha">Khordha</option>
+            <option value="Koraput">Koraput</option>
+            <option value="Malkangiri">Malkangiri</option>
+            <option value="Mayurbhanj">Mayurbhanj</option>
+            <option value="Nabarangpur">Nabarangpur</option>
+            <option value="Nayagarh">Nayagarh</option>
+            <option value="Nuapada">Nuapada</option>
+            <option value="Puri">Puri</option>
+            <option value="Rayagada">Rayagada</option>
+            <option value="Sambalpur">Sambalpur</option>
+            <option value="Subarnapur (Sonepur)">Subarnapur (Sonepur)</option>
+            <option value="Sundargarh">Sundargarh</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <label for="season">Season</label>
+          <select id="season" name="season" required>
+            <option value="">Select Season</option>
+            <option value="Rabi">Rabi</option>
+            <option value="Zaid">Zaid</option>
+            <option value="Kharif">Kharif</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="crop">Crop</label>
+          <select id="crop" name="crop" required>
+            <option value="">Select Crop</option>
+            <option value="Paddy">Paddy</option>
+            <option value="Maize">Maize</option>
+            <option value="Vegetables">Vegetables</option>
+            <option value="Moong">Moong</option>
+            <option value="Mustard">Mustard</option>
+            <option value="Sunflower">Sunflower</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="soil_type">Soil Type</label>
+          <select id="soil_type" name="soil_type" required>
+            <option value="">Select Soil Type</option>
+            <option value="Loamy">Loamy</option>
+            <option value="Clay Loam">Clay Loam</option>
+            <option value="Sandy Loam">Sandy Loam</option>
+            <option value="Silty Loam">Silty Loam</option>
+            <option value="Sandy">Sandy</option>
+          </select>
+        </div>
+
+        <button type="submit">Predict Yield</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Made by Team D-Generation X for SIH '25
+  </footer>
+
+  <script>
+    const form = document.getElementById("prediction-form");
+
+    window.addEventListener("beforeunload", function (e) {
+      if (!form.dataset.submitted) {
+        navigator.sendBeacon("{{ url_for('logout') }}");
+      }
+    });
+
+    form.addEventListener("submit", function () {
+      form.dataset.submitted = "true";  // prevent logout on form submit
+    });
+  </script>
+
+
+</body>
+
+</html>
