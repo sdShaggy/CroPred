@@ -73,6 +73,12 @@ Make sure you have the following installed:
 
 ---
 
+## Author
+
+**Team D-Generation X**  
+Project maintained and developed with ❤️
+
+This project was developed as for SIH '25 by Team D-generation X.
 
 
 
