@@ -78,7 +78,7 @@ Make sure you have the following installed:
 **Team D-Generation X**  
 Project maintained and developed with ❤️
 
-This project was developed as for SIH '25 by Sarvagya Dwivedi & Team D-generation X.
+This project was developed as for SIH '25 by **Sarvagya Dwivedi** & Team D-generation X.
 
 
 
