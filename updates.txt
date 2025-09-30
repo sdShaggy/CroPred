@@ -1,0 +1,17 @@
+Future updates:
+
+- Integration of real-life dataset with collaboration with Govt. of Orissa. (The prototype is made on a mock dataset , based on real data)
+
+- Multilingual feature: adding Odia, Bengali and Hindi translations 
+
+- Adding Voice command features.
+
+- Simulations based on Fertilizers and Irrigation techniques.
+
+- Showing Explainable AI showing how does the predictions work.
+
+- Mobile application integration for offline support.
+
+- FPO and district-level officer's side dashboard.
+
+- API for simple integration with Govt. of Orissa existing platforms.
