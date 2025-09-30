@@ -14,10 +14,10 @@ USERS = {
 }
 
 
-XGB_MODEL_PATH = "xgb_model_1.joblib"
-LSTM_MODEL_PATH = "lstm_model_1.joblib"
-SCALER_PATH = "scaler_1.joblib"
-FEATURE_COLUMNS_PATH = "feature_columns_r1.joblib"
+XGB_MODEL_PATH = "models/xgb_model_1.joblib"
+LSTM_MODEL_PATH = "models/lstm_model_1.joblib"
+SCALER_PATH = "models/scaler_1.joblib"
+FEATURE_COLUMNS_PATH = "models/feature_columns_r1.joblib"
 
 
 if not os.path.exists(XGB_MODEL_PATH):
@@ -397,3 +397,4 @@ def predict():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
+
